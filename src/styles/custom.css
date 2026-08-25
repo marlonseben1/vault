@@ -1,0 +1,76 @@
+:root {
+    /* Accent (dark mode) — paleta ciano/azul-petróleo do blog (oklch hue ~213) */
+    --sl-color-accent-low: #164e63;
+    --sl-color-accent: #22d3ee;
+    --sl-color-accent-high: #a5f3fc;
+}
+
+:root[data-theme="light"] {
+    /* Accent (light mode) */
+    --sl-color-accent-high: #155e75;
+    --sl-color-accent: #0891b2;
+    --sl-color-accent-low: #cffafe;
+}
+
+:root {
+    /* Coluna de conteúdo mais larga, igual ao .layout (1100px) do blog */
+    --sl-content-width: 68.75rem;
+}
+
+mark {
+    background-color: #fff3a3;
+    color: #1a1a1a;
+    padding: 0.05em 0.25em;
+    border-radius: 2px;
+}
+
+:root[data-theme="dark"] mark {
+    background-color: #7a6a00;
+    color: #fff3a3;
+}
+
+/* Remove a linha divisória entre o conteúdo e o "On this page" */
+.right-sidebar {
+    border-inline-start: none;
+}
+
+/* On this page — estilo timeline */
+/* border/margem só no <ul> mais externo, pra dar 1 linha só (o Starlight
+   sempre aninha os headings reais dentro de um <li> "Overview" pai) */
+.right-sidebar-panel nav > ul {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+    border-inline-start: 1px solid var(--sl-color-gray-5);
+}
+
+.right-sidebar-panel nav ul a {
+    position: relative;
+    color: var(--sl-color-gray-3);
+    font-size: var(--sl-text-sm);
+}
+
+.right-sidebar-panel nav ul a::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: -5.5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: var(--sl-color-bg);
+    border: 1.5px solid var(--sl-color-gray-4);
+}
+
+.right-sidebar-panel nav ul a[aria-current='true'] {
+    color: var(--sl-color-white);
+    font-weight: 600;
+}
+
+.right-sidebar-panel nav ul a[aria-current='true']::before {
+    background: var(--sl-color-white);
+    border-color: var(--sl-color-white);
+}

@@ -1,0 +1,124 @@
+{
+	"name": "blog-dark",
+	"type": "dark",
+	"colors": {
+		"editor.background": "#0e1111",
+		"editor.foreground": "#e5e5e5",
+		"editor.selectionBackground": "#22d3ee33",
+		"editorLineNumber.foreground": "#737373",
+		"editorLineNumber.activeForeground": "#22d3ee",
+		"editorCursor.foreground": "#e5e5e5",
+		"focusBorder": "#22d3ee"
+	},
+	"tokenColors": [
+		{
+			"settings": { "foreground": "#e5e5e5" }
+		},
+		{
+			"name": "Constants (numbers, links)",
+			"scope": [
+				"constant.numeric",
+				"constant.language",
+				"constant.other.placeholder",
+				"constant.character.format.placeholder",
+				"variable.language.this",
+				"variable.other.object",
+				"variable.other.class",
+				"variable.other.constant",
+				"meta.property-name",
+				"meta.property-value",
+				"support",
+				"meta.link.inline.markdown"
+			],
+			"settings": { "foreground": "#fbbf24" }
+		},
+		{
+			"name": "Strings",
+			"scope": ["string", "markup.fenced_code", "markup.inline"],
+			"settings": { "foreground": "#9ecbff" }
+		},
+		{
+			"name": "Comments",
+			"scope": ["comment", "string.quoted.docstring.multi"],
+			"settings": { "foreground": "#737373", "fontStyle": "italic" }
+		},
+		{
+			"name": "Keywords",
+			"scope": [
+				"keyword",
+				"storage.modifier",
+				"storage.type",
+				"storage.control.clojure",
+				"entity.name.function.clojure",
+				"entity.name.tag.yaml",
+				"support.function.node",
+				"support.type.property-name.json",
+				"punctuation.separator.key-value",
+				"punctuation.definition.template-expression"
+			],
+			"settings": { "foreground": "#93c5fd" }
+		},
+		{
+			"name": "Parameters",
+			"scope": "variable.parameter.function",
+			"settings": { "foreground": "#e5e5e5" }
+		},
+		{
+			"name": "Functions, Types",
+			"scope": [
+				"support.function",
+				"entity.name.type",
+				"entity.other.inherited-class",
+				"meta.function-call",
+				"meta.instance.constructor",
+				"entity.other.attribute-name",
+				"entity.name.function",
+				"constant.keyword.clojure"
+			],
+			"settings": { "foreground": "#e5e5e5" }
+		},
+		{
+			"name": "Tags (JSX/HTML), quoted/template strings",
+			"scope": [
+				"entity.name.tag",
+				"string.quoted",
+				"string.regexp",
+				"string.interpolated",
+				"string.template",
+				"string.unquoted.plain.out.yaml",
+				"keyword.other.template"
+			],
+			"settings": { "foreground": "#4cffb4" }
+		},
+		{
+			"name": "Punctuation",
+			"scope": [
+				"punctuation.definition.arguments",
+				"punctuation.definition.dict",
+				"punctuation.separator",
+				"meta.function-call.arguments"
+			],
+			"settings": { "foreground": "#e5e5e5" }
+		},
+		{
+			"name": "Markdown links",
+			"scope": ["markup.underline.link", "punctuation.definition.metadata.markdown"],
+			"settings": { "foreground": "#e5e5e5" }
+		},
+		{
+			"name": "Markdown list",
+			"scope": ["beginning.punctuation.definition.list.markdown"],
+			"settings": { "foreground": "#9ecbff" }
+		},
+		{
+			"name": "Markdown punctuation brackets",
+			"scope": [
+				"punctuation.definition.string.begin.markdown",
+				"punctuation.definition.string.end.markdown",
+				"string.other.link.title.markdown",
+				"string.other.link.description.markdown"
+			],
+			"settings": { "foreground": "#93c5fd" }
+		}
+	]
+}
