@@ -111,3 +111,61 @@ func main() {
 ```
 
 ## Arrays internos
+
+Quando criamos um Slice, sem referenciar diretamente um array, ele vai referenciar o que chamamos de "Array interno". No exemplo abaixo, a função `make` criou um array de 15 posições e nos retornou um slice de 10 posições (referenciando as 10 primeiras posições desse array).
+
+A função `make` recebe 3 parâmetros:
+
+1. O tipo do slice;
+2. O tamanho do slice (quantidade de itens);
+3. O tamanho máximo do slice;
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	slice := make([]float32, 10, 15)
+
+	fmt.Println(slice) // [0 0 0 0 0 0 0 0 0 0]
+	fmt.Println(len(slice)) // lenght: 10
+	fmt.Println(cap(slice)) // capacidade: 15
+}
+```
+
+Quando o Go percebe que um Slice vai estourar o tamanho, ele cria outro Array para ser referenciado e dobra o tamanho Slice. Esse é o motivo do Slice não ter um tamanho limite em Go.
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	slice := make([]float32, 10, 11)
+
+	slice = append(slice, 5)
+	slice = append(slice, 6)
+
+	fmt.Println(slice) // [0 0 0 0 0 0 0 0 0 0 5 6]
+	fmt.Println(len(slice)) // lenght: 12
+	fmt.Println(cap(slice)) // capacidade: 24
+}
+```
+
+Quando não passamos o último parâmetro (capacidade máxima) para o `make`, ele definirá que a capacidade do Slice é igual ao tamanho dele
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	slice := make([]float32, 5)
+
+	fmt.Println(slice) // [0 0 0 0 0]
+	fmt.Println(len(slice)) // lenght: 5
+	fmt.Println(cap(slice)) // capacidade: 5
+
+}
+```
