@@ -167,3 +167,52 @@ func main() {
 	// Hello World 6
 }
 ```
+
+### Funções anônimas
+
+Funções anônimas são basicamente funções que são chamadas sem um nome
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// Função anônima que printa Hello World!
+	func() {
+		fmt.Print("Hello World!")
+	}()
+}
+```
+
+As funções anônimas também aceitam parâmetros
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// Função anônima que printa um texto recebido pelo param texto
+	func(texto string) {
+		fmt.Println(texto)
+	}("Hello World!")
+}
+```
+
+Elas também podem retornar valores
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// Função anônima que retorna string concatenada
+	retorno := func(texto string) string {
+		return fmt.Sprintf("Recebido -> %s", texto)
+	}("Alguma coisa")
+
+	fmt.Println(retorno) // Recebido -> Alguma coisa
+}
+```
