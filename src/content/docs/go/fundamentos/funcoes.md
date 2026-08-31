@@ -92,3 +92,27 @@ func main() {
 	_, subtracao := calculosMatematicos(5, 20)
 }
 ```
+
+### Funções com retorno nomeado
+
+Quando declaramos uma função, podemos passar um nome para os retornos dela, dessa forma a função tem um retorno nomeado, facilitando a leitura e escrita da mesma.
+
+Repare que não estamos declarando as variáveis `soma` e `subtracao` com o `:=`, como ela já está nomeada no retorno, podemos usar simplesmente o `=`. Além disso, não é necessário retornar `soma` e `subtracao` de forma explicita, bastando usar somente `return`
+
+```go
+package main
+
+import "fmt"
+
+func calculosMatematicos(n1, n2 int) (soma int, subtracao int) {
+	soma = n1 + n2
+	subtracao = n1 - n2
+	return
+}
+
+func main() {
+	soma, subtracao := calculosMatematicos(10, 20)
+
+	fmt.Println(soma, subtracao) // 30 -10
+}
+```
