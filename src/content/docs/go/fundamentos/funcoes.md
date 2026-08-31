@@ -116,3 +116,54 @@ func main() {
 	fmt.Println(soma, subtracao) // 30 -10
 }
 ```
+
+### Funções variáticas
+
+As funções variáticas são funções que podem receber n parâmetros, não sendo necessário especificar a quantidade de parâmetros que ela irá receber.
+
+Para isso, usamos `...` e o tipo ao declarar o parâmetro que ela recebe, como no exemplo abaixo, onde a função recebe de 0 a n números
+
+```go
+package main
+
+import "fmt"
+
+func soma(numeros ...int) int {
+	total := 0
+	for _, numero := range numeros {
+		total += numero
+	}
+
+	return total
+}
+
+func main() {
+	totalDaSoma := soma(1, 2, 3, 4, 5, 6, 200, 102, 12, 13)
+
+	fmt.Println(totalDaSoma) // 348
+}
+```
+
+É possível também criar funções que combinem parâmetros fixos com parâmetros variáticos. A limitação é que não podemos ter mais de um parâmetro variático por função e que o parâmetro variático deve ser obrigatoriamente o último parâmetro que a função recebe
+
+```go
+package main
+
+import "fmt"
+
+func escrever(texto string, numeros ...int) {
+	for _, numero := range numeros {
+		fmt.Println(texto, numero)
+	}
+}
+
+func main() {
+	escrever("Hello World", 10, 2, 3, 4, 5, 6)
+	// Hello World 10
+	// Hello World 2
+	// Hello World 3
+	// Hello World 4
+	// Hello World 5
+	// Hello World 6
+}
+```
