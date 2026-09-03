@@ -244,3 +244,36 @@ func main() {
 
 }
 ```
+
+### Funções closure
+
+São basicamente funções que referenciam variáveis que estão fora do seu corpo
+
+Quando minha a função `minhaClosure` é criada, o `texto` que estavamos usando era o "Dentro da closure!", então ao executar ela, a referência não vai ser perdida, mesmo que dentro da função `main` também tenhamos uma outra variável chamada texto, mantendo a referência original
+
+```go
+package main
+
+import "fmt"
+
+func minhaClosure() func() {
+	texto := "Dentro da closure!"
+
+	funcao := func() {
+		fmt.Println(texto)
+	}
+
+	return funcao
+}
+
+func main() {
+	texto := "Dentro da main"
+	fmt.Println(texto)
+
+	funcaoNova := minhaClosure()
+	funcaoNova()
+
+	// Dentro da main
+	// Dentro da closure!
+}
+```
