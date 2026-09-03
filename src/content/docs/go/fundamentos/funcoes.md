@@ -216,3 +216,31 @@ func main() {
 	fmt.Println(retorno) // Recebido -> Alguma coisa
 }
 ```
+
+### Funções recursivas
+
+Funções recursivas são funções que chamam elas mesmas. Para que sua execução funcione, ela depende de uma outra execução dela mesma. Funções recursivas devem ter uma condição de parada, do contrário teriamos um "stack overflow".
+
+```go
+package main
+
+import "fmt"
+
+func fibonacci(posicao uint) uint {
+	if posicao <= 1 {
+		return posicao
+	}
+
+	return fibonacci(posicao-2) + fibonacci(posicao-1)
+}
+
+func main() {
+	posicao := uint(10)
+	fmt.Println(fibonacci(posicao)) // 55
+
+	for i := uint(0); i < posicao; i++ {
+		fmt.Println(fibonacci(i)) // 0 1 1 2 3 5 8 13 21 34 55 89
+	}
+
+}
+```
