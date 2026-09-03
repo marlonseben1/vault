@@ -277,3 +277,78 @@ func main() {
 	// Dentro da closure!
 }
 ```
+
+### Funções com ponteiros
+
+Ao chamar a função `inverterSinal` estamos passando uma _cópia do valor_ da variável `numero` (nesse caso "20") e jogando na variável `numeroInvertido`. A variável `numero` fica inalterada
+
+Isso acontece pois estamos mexendo com o valor e não com o endereço de memória
+
+```go
+package main
+
+import "fmt"
+
+func inverterSinal(numero int) int {
+	return numero * -1
+}
+
+func main() {
+	numero := 20
+	numeroInvertido := inverterSinal(numero)
+	fmt.Println(numeroInvertido) // -20
+	fmt.Printl(numero) // 20
+}
+```
+
+Podemos reescrever essa função usando ponteiros, passando o endereço de memória onde a variável está salva, fazendo com que toda alteração reflita diretamente na variável
+
+```go
+package main
+
+import "fmt"
+
+func inverterSinalComPonteiros(numero *int) {
+	// Desferênciação
+	*numero = *numero * -1
+}
+
+func main() {
+	novoNumero := 40
+	fmt.Println(novoNumero) // 40
+	inverterSinalComPonteiros(&novoNumero)
+	fmt.Println(novoNumero) // -40
+}
+```
+
+:::note
+Note que não retornamos na função com ponteiro, pois já estamos modificando o valor diretamente na variável
+:::
+
+:::tip
+Ao chamar uma função passando uma variável normal (não um ponteiro), dizemos que estamos passando um parâmetro _por cópia_. Ao passar um ponteiro, estamos passando um parâmetro por _referência_
+:::
+
+### Função init
+
+A função `init` nada mais é do que uma função que será executada antes da função `main`
+
+```go
+package main
+
+import "fmt"
+
+var n int
+
+func init() {
+	fmt.Println("Executando a função init")
+	n = 10
+}
+
+func main() {
+	fmt.Println("Função main sendo executada")
+	fmt.Println(n) 
+}
+```
+
+A grande diferença, é que podemos ter uma função `init` por arquivo (e não apenas uma por pacote). Se tivermos um pacote com 10 arquivos, cada um pode ter sua função `init`, e antes de cada um deles ser executado, a função `init` será executada, podendo ser usada para um setup, declaração de uma variável global etc
