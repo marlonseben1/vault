@@ -2,6 +2,8 @@
 title: Interfaces
 ---
 
+### Interfaces
+
 As interfaces em Go possuem apenas assinaturas de métodos, dizendo como eles devem ser. Em Go, a implementação de interfaces é implícita, não precisando usar um "implements" manual
 
 ```go
@@ -43,5 +45,44 @@ func main() {
 
 	c := circulo(10)
 	escreverArea(c) // A área da forma é 314.00
+}
+```
+
+### Genéricos
+
+Podemos usar uma interface como um tipo genérico para nossa função aceitar qualquer coisa (tanto para parâmetros quanto para retornos)
+
+```go
+package main
+
+import "fmt"
+
+func generica(interf interface{}) {
+	fmt.Println(interf)
+}
+
+func main() {
+	generica("String") // String
+	generica(1) // 1
+	generica(true) // true
+}
+```
+
+Todavia isso deve ser usado com ressalvas, não como uma forma de tentarmos "passar por cima" da tipagem forte do Go. Um exemplo de uso ruim:
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	mapa := map[interface{}]interface{}{
+		1:            "String",
+		float32(100): true,
+		"String":     "String",
+		true:         float64(12),
+	}
+
+	fmt.Println(mapa) // map[true:12 100:true 1:String String:String]
 }
 ```
