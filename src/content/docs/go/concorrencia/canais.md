@@ -201,3 +201,66 @@ func main() {
 
 	fmt.Println("Fim do programa!")
 ```
+
+### Canais com buffer
+
+É sempre importante lembrar que trabalhando com canais, as operações de enviar e receber dados são sempre bloqueantes. No exemplo abaixo, ao enviar o valor "Hello World!" para o canal, o programa irá esperar alguma outra parte do código receber um valor desse canal, porém isso nunca vai acontecer, pois ele ficará bloqueado em `canal <- "Hello World!` e nunca chegará na linha que de fato está recebendo o valor `mensagem := <-canal`, ocorrendo um deadlock
+
+É justamente por isso que normalmente usamos canais em funções separadas, tendo uma função que envia o valor e outra que recebe
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	canal := make(chan string)
+
+	canal <- "Hello World"
+
+	mensagem := <-canal
+	fmt.Println(mensagem)
+
+	// fatal error: all goroutines are asleep - deadlock!
+}
+```
+
+Uma alternativa para permanecer na mesma função é criar um canal com buffer. Canais com buffer recebem uma capacidade.
+
+A diferença de um canal normal para um canal com buffer, é que o canal com buffer só vai bloquear quando ele atingir sua capacidade máxima
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	// como o canal possui uma capacidade de 2, ele não vai bloquear o programa
+	canal := make(chan string, 2)
+
+	canal <- "Hello World!"
+
+	mensagem := <- canal
+	fmt.Println(mensagem) // Hello World!
+}
+```
+
+Seguindo exemplo acima, de um canal com buffer com a capacidade 2, poderiamos inclusive fazer com que ele esperasse receber outro valor
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	canal := make(chan string, 2)
+	canal <- "Hello World!"
+	canal <- "Programando em Go!"
+	// canal <- "Terceiro valor" - aqui ele daria deadlock, pois estoura a capacidade de 2 do buffer
+
+	mensagem := <- canal
+	mensagem2 := <- canal
+	fmt.Println(mensagem) // Hello World!
+	fmt.Println(mensagem2) // Programando em Go!
+}
+```
