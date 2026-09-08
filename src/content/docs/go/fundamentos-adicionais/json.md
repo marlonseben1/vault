@@ -55,3 +55,39 @@ func main() {
 	fmt.Println(bytes.NewBuffer(cachorro2EmJSON)) // {"nome": "Toby", "raca": "Poodle"}
 }
 ```
+
+### json.Unmarshal()
+
+Para fazer o caminho inverso (converter um JSON em um map ou struct), usamos o método `json.Unmarshal()`
+
+```go
+package main
+
+type cachorro struct {
+	Nome string `json:"nome"` // se quiser ocultar do json, pode usar `json:"-"`
+	Raca string `json:"raca"`
+	Idade uint  `json:"idade"`
+}
+
+func main() {
+	cachorroEmJSON := `{"nome":"Rex","raca":"Poodle","idade":3}`
+
+	var c cachorro
+
+	if erro := json.Unmarshal([]byte(cachorroEmJSON), &c); erro != nil {
+		log.Fatal(erro)
+	}
+
+	fmt.Println(c) // {Rex Poodle 3}
+
+	cachorro2EmJSON := `{"nome":"Toby","raca":"Poodle"`
+
+	c2 := make(map[string]string)
+
+	if erro := json.Unmarshal([]byte(cachorro2EmJSON), &c2); erro != nil {
+		lof.Fatal(erro)
+	}
+
+	fmt.Println(c2) // map[nome:Toby raca:Poodle]
+}
+```
